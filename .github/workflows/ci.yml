@@ -12,6 +12,15 @@ on:
 permissions:
   contents: read
 
+# Cancel in-progress runs on the same ref when a newer push lands. Without
+# `cancel-in-progress`, every push to a busy PR queues another full run
+# (test + verify-dist) and the older runs continue burning minutes after
+# their commit is already obsolete. Explicit `group:` keys per-ref so two
+# PRs don't cancel each other.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     uses: ledgermem/.github/.github/workflows/node-test.yml@main

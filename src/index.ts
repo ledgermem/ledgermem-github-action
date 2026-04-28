@@ -106,7 +106,11 @@ export async function run(
       core.setOutput("results", JSON.stringify(results));
       core.setOutput("memory-id", "");
       core.info(`LedgerMem returned ${results.length} result(s).`);
-      core.summary
+      // `core.summary.write()` returns a Promise — without `await`, the
+      // process can exit before the summary file is flushed and the action
+      // run shows no summary in the GitHub UI even though the operation
+      // succeeded.
+      await core.summary
         .addHeading(`LedgerMem search: ${inputs.query}`, 2)
         .addRaw(`Returned **${results.length}** result(s).`)
         .write();

@@ -68,6 +68,11 @@ async function run() {
     return;
   }
 
+  // Mask the API key in any subsequent runner log output.
+  if (inputs.apiKey) {
+    core.setSecret(inputs.apiKey);
+  }
+
   const sdk = new LedgerMemClient({ apiKey: inputs.apiKey, baseUrl: inputs.endpoint });
 
   try {

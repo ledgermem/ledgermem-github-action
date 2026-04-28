@@ -81,6 +81,15 @@ export async function run(
     return;
   }
 
+  // Register the API key as a secret so the runner masks it from any
+  // subsequent log output — including stack traces, network errors, or
+  // anything else that might echo the input back. Without this, a
+  // misconfigured workflow that passes the key plainly (instead of via
+  // secrets.*) would leak it on every run.
+  if (inputs.apiKey) {
+    core.setSecret(inputs.apiKey);
+  }
+
   const client = clientFactory(inputs.apiKey, inputs.endpoint);
 
   try {

@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+# Default to read-only at the workflow level. Without this, GitHub's
+# default token has write permissions to the repo, which is dangerous on
+# `pull_request` runs from untrusted forks.
+permissions:
+  contents: read
+
 jobs:
   test:
     uses: ledgermem/.github/.github/workflows/node-test.yml@main

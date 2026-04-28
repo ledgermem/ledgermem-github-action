@@ -105,12 +105,13 @@ async function run() {
         content: inputs.content,
         workspaceId: inputs.workspaceId,
         metadata: Object.assign(
+          {},
+          inputs.metadata,
           {
             source: "github-actions",
             runId: process.env.GITHUB_RUN_ID || "",
             repository: process.env.GITHUB_REPOSITORY || "",
-          },
-          inputs.metadata
+          }
         ),
       })
     );

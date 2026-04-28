@@ -111,11 +111,15 @@ export async function run(
     const memory = await client.add({
       content: inputs.content,
       workspaceId: inputs.workspaceId,
+      // Spread user-supplied metadata FIRST so the trusted provenance
+      // fields (source, runId, repository) cannot be forged from the
+      // workflow input — important when a workflow is triggered by a
+      // pull_request from a fork.
       metadata: {
+        ...inputs.metadata,
         source: "github-actions",
         runId: process.env.GITHUB_RUN_ID ?? "",
         repository: process.env.GITHUB_REPOSITORY ?? "",
-        ...inputs.metadata,
       },
     });
     core.setOutput("results", "[]");

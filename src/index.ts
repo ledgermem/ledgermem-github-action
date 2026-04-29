@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-import { LedgerMemClient } from "@ledgermem/memory";
+import { MnemoClient } from "@getmnemo/memory";
 
 type Operation = "add" | "search";
 
@@ -52,7 +52,7 @@ export function readInputs(): Inputs {
     content: core.getInput("content"),
     query: core.getInput("query"),
     limit,
-    endpoint: core.getInput("endpoint") || "https://api.ledgermem.dev",
+    endpoint: core.getInput("endpoint") || "https://api.getmnemo.dev",
     metadata,
   };
 }
@@ -105,13 +105,13 @@ export async function run(
       });
       core.setOutput("results", JSON.stringify(results));
       core.setOutput("memory-id", "");
-      core.info(`LedgerMem returned ${results.length} result(s).`);
+      core.info(`Mnemo returned ${results.length} result(s).`);
       // `core.summary.write()` returns a Promise — without `await`, the
       // process can exit before the summary file is flushed and the action
       // run shows no summary in the GitHub UI even though the operation
       // succeeded.
       await core.summary
-        .addHeading(`LedgerMem search: ${inputs.query}`, 2)
+        .addHeading(`Mnemo search: ${inputs.query}`, 2)
         .addRaw(`Returned **${results.length}** result(s).`)
         .write();
       return;
@@ -144,7 +144,7 @@ export async function run(
 }
 
 function defaultClientFactory(apiKey: string, baseUrl: string): ClientLike {
-  const sdk = new LedgerMemClient({ apiKey, baseUrl });
+  const sdk = new MnemoClient({ apiKey, baseUrl });
   return {
     async search(args): Promise<readonly Memory[]> {
       const results = await sdk.search(args);

@@ -1,5 +1,5 @@
-name: "LedgerMem"
-description: "Add to or search a LedgerMem workspace from a GitHub Actions workflow."
+name: "Mnemo"
+description: "Add to or search a Mnemo workspace from a GitHub Actions workflow."
 author: "Proofly"
 branding:
   icon: "book-open"
@@ -7,10 +7,10 @@ branding:
 
 inputs:
   api-key:
-    description: "LedgerMem API key. Use a secret like ${{ secrets.LEDGERMEM_API_KEY }}."
+    description: "Mnemo API key. Use a secret like ${{ secrets.GETMNEMO_API_KEY }}."
     required: true
   workspace-id:
-    description: "Target LedgerMem workspace ID."
+    description: "Target Mnemo workspace ID."
     required: true
   operation:
     description: "What to do: `add` or `search`."
@@ -31,7 +31,7 @@ inputs:
   endpoint:
     description: "Override the API endpoint (e.g. for self-hosted deployments)."
     required: false
-    default: "https://api.ledgermem.dev"
+    default: "https://api.getmnemo.dev"
   metadata:
     description: "Optional JSON object to attach as metadata when operation=add."
     required: false

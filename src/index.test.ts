@@ -31,9 +31,9 @@ vi.mock("@actions/core", () => {
   };
 });
 
-vi.mock("@ledgermem/memory", () => {
+vi.mock("@getmnemo/memory", () => {
   return {
-    LedgerMemClient: class {
+    MnemoClient: class {
       async search(args: { query: string }): Promise<unknown[]> {
         return [
           { id: "m1", content: `match for ${args.query}`, createdAt: "2026-01-01", score: 0.92 },

@@ -1,8 +1,8 @@
 {
-  "name": "@ledgermem/github-action",
+  "name": "@getmnemo/github-action",
   "version": "0.1.0",
   "private": true,
-  "description": "GitHub Action for adding to and searching a LedgerMem workspace.",
+  "description": "GitHub Action for adding to and searching a Mnemo workspace.",
   "main": "dist/index.js",
   "scripts": {
     "build": "ncc build src/index.ts -o dist --license licenses.txt",
@@ -13,11 +13,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ledgermem/ledgermem-github-action.git"
+    "url": "https://github.com/getmnemo/getmnemo-github-action.git"
   },
   "dependencies": {
     "@actions/core": "^1.10.1",
-    "@ledgermem/memory": "^0.1.0"
+    "@getmnemo/memory": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

@@ -31,7 +31,7 @@ vi.mock("@actions/core", () => {
   };
 });
 
-vi.mock("@getmnemo/memory", () => {
+vi.mock("@mnemo/memory", () => {
   return {
     MnemoClient: class {
       async search(args: { query: string }): Promise<unknown[]> {
